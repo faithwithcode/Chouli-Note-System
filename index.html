@@ -439,15 +439,15 @@
         <span class="field-num">2</span>
         往生者健保卡 <span class="required">（必填）</span>
       </div>
-      <div class="field-desc">請上傳健保卡正面掃描檔或照片</div>
+      <div class="field-desc">請以手機拍攝健保卡正面，或從相簿選擇照片上傳</div>
       <div class="field-body">
         <label class="upload-box" id="box-nhi" for="file-nhi">
-          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
-          <div class="upload-hint"><strong>點擊上傳</strong>或拖曳圖片檔至此</div>
-          <input type="file" id="file-nhi" name="file-nhi" accept="image/*,.pdf" required>
+          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h1.3l.9-1.4a1 1 0 0 1 .85-.6h5.9a1 1 0 0 1 .85.6l.9 1.4H18a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z"/><circle cx="12" cy="13" r="3.3"/></svg></div>
+          <div class="upload-hint"><strong>點擊拍照</strong>或選擇照片</div>
+          <input type="file" id="file-nhi" name="file-nhi" accept="image/*" capture="environment" required>
         </label>
         <div class="upload-preview" id="preview-nhi"></div>
-        <div class="error-msg" id="err-nhi">請提供往生者健保卡掃描檔，以便協助後續程序</div>
+        <div class="error-msg" id="err-nhi">請提供往生者健保卡照片，以便協助後續程序</div>
         <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>此文件僅用於本次程序，我們會謹慎保管。</span></div>
       </div>
     </div>
@@ -458,15 +458,15 @@
         <span class="field-num">3</span>
         往生者身分證 <span class="required">（必填）</span>
       </div>
-      <div class="field-desc">請上傳身分證正面掃描檔或照片</div>
+      <div class="field-desc">請以手機拍攝身分證正面，或從相簿選擇照片上傳</div>
       <div class="field-body">
         <label class="upload-box" id="box-id" for="file-id">
-          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
-          <div class="upload-hint"><strong>點擊上傳</strong>或拖曳圖片檔至此</div>
-          <input type="file" id="file-id" name="file-id" accept="image/*,.pdf" required>
+          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h1.3l.9-1.4a1 1 0 0 1 .85-.6h5.9a1 1 0 0 1 .85.6l.9 1.4H18a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z"/><circle cx="12" cy="13" r="3.3"/></svg></div>
+          <div class="upload-hint"><strong>點擊拍照</strong>或選擇照片</div>
+          <input type="file" id="file-id" name="file-id" accept="image/*" capture="environment" required>
         </label>
         <div class="upload-preview" id="preview-id"></div>
-        <div class="error-msg" id="err-id">請提供往生者身分證掃描檔，以便協助後續程序</div>
+        <div class="error-msg" id="err-id">請提供往生者身分證照片，以便協助後續程序</div>
         <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>此文件僅用於本次程序，我們會謹慎保管。</span></div>
       </div>
     </div>
@@ -477,7 +477,7 @@
         <span class="field-num">4</span>
         相驗類型決定 <span class="required">（必填）</span>
       </div>
-      <div class="field-desc">因往生地點不同，將對應不同的行政或司法流程，請選擇本次相驗類型</div>
+      <div class="field-desc">因往生地點不同，將對應不同的行政或司法流程，請選擇本次相驗類型（僅能擇一）</div>
       <div class="field-body">
         <div class="radio-group">
           <label class="radio-option" id="opt-admin" for="verify-admin">
@@ -499,11 +499,11 @@
 
         <!-- 行政相驗上傳 -->
         <div class="conditional-upload" id="cond-admin">
-          <div class="sub-label">請上傳醫師診斷證明書</div>
+          <div class="sub-label">請上傳醫師診斷證明書（PDF 掃描檔）</div>
           <label class="upload-box" id="box-admin-doc" for="file-admin-doc">
-            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
-            <div class="upload-hint"><strong>點擊上傳</strong>或拖曳檔案至此</div>
-            <input type="file" id="file-admin-doc" name="file-admin-doc" accept="image/*,.pdf">
+            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/></svg></div>
+            <div class="upload-hint"><strong>點擊上傳</strong> PDF 掃描檔</div>
+            <input type="file" id="file-admin-doc" name="file-admin-doc" accept="application/pdf">
           </label>
           <div class="upload-preview" id="preview-admin-doc"></div>
           <div class="error-msg" id="err-admin-doc">請提供醫師診斷證明書</div>
@@ -511,11 +511,11 @@
 
         <!-- 司法相驗上傳 -->
         <div class="conditional-upload" id="cond-judicial">
-          <div class="sub-label">請上傳相驗屍體證明書</div>
+          <div class="sub-label">請上傳相驗屍體證明書（PDF 掃描檔）</div>
           <label class="upload-box" id="box-judicial-doc" for="file-judicial-doc">
-            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
-            <div class="upload-hint"><strong>點擊上傳</strong>或拖曳檔案至此</div>
-            <input type="file" id="file-judicial-doc" name="file-judicial-doc" accept="image/*,.pdf">
+            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/></svg></div>
+            <div class="upload-hint"><strong>點擊上傳</strong> PDF 掃描檔</div>
+            <input type="file" id="file-judicial-doc" name="file-judicial-doc" accept="application/pdf">
           </label>
           <div class="upload-preview" id="preview-judicial-doc"></div>
           <div class="error-msg" id="err-judicial-doc">請提供相驗屍體證明書</div>
@@ -529,11 +529,11 @@
         <span class="field-num">5</span>
         死亡證明書 <span class="required">（必填）</span>
       </div>
-      <div class="field-desc">請上傳行政或司法相驗流程後產生的死亡證明書（PDF掃描檔）</div>
+      <div class="field-desc">請上傳行政或司法相驗流程後產生的死亡證明書（PDF 掃描檔）</div>
       <div class="field-body">
         <label class="upload-box" id="box-death" for="file-death">
           <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/></svg></div>
-          <div class="upload-hint">點擊上傳 <strong>PDF</strong> 掃描檔</div>
+          <div class="upload-hint"><strong>點擊上傳</strong> PDF 掃描檔</div>
           <input type="file" id="file-death" name="file-death" accept="application/pdf" required>
         </label>
         <div class="upload-preview" id="preview-death"></div>
@@ -566,15 +566,55 @@
   const optAdmin = document.getElementById('opt-admin');
   const optJudicial = document.getElementById('opt-judicial');
 
+  // 行政相驗／司法相驗為互斥關係：兩者的上傳文件不可同時存在
+  const VERIFY_FILE_MAP = {
+    administrative: { inputId: 'file-admin-doc', boxId: 'box-admin-doc', previewId: 'preview-admin-doc', label: '行政相驗（醫師診斷證明書）' },
+    judicial: { inputId: 'file-judicial-doc', boxId: 'box-judicial-doc', previewId: 'preview-judicial-doc', label: '司法相驗（相驗屍體證明書）' }
+  };
+
+  function clearUploadedFile(inputId, boxId, previewId){
+    const input = document.getElementById(inputId);
+    const box = document.getElementById(boxId);
+    const preview = document.getElementById(previewId);
+    input.value = '';
+    box.classList.remove('has-file');
+    preview.style.display = 'none';
+    preview.innerHTML = '';
+  }
+
+  let activeVerifyType = null;
+
   verifyRadios.forEach(r => {
-    r.addEventListener('change', () => {
-      condAdmin.classList.toggle('active', r.value === 'administrative' && r.checked);
-      condJudicial.classList.toggle('active', r.value === 'judicial' && r.checked);
-      optAdmin.classList.toggle('selected', document.getElementById('verify-admin').checked);
-      optJudicial.classList.toggle('selected', document.getElementById('verify-judicial').checked);
+    r.addEventListener('change', function(){
+      const newType = this.value;
+      const otherType = newType === 'administrative' ? 'judicial' : 'administrative';
+      const otherFile = VERIFY_FILE_MAP[otherType];
+      const otherInput = document.getElementById(otherFile.inputId);
+
+      // 若另一種相驗類型已有上傳文件，需先確認才能清除並切換，避免誤觸遺失資料
+      if(otherInput.files.length){
+        const confirmed = window.confirm('切換相驗類型後，先前上傳的「' + otherFile.label + '」文件將會一併清除，確定要切換嗎？');
+        if(!confirmed){
+          if(activeVerifyType){
+            document.getElementById(activeVerifyType === 'administrative' ? 'verify-admin' : 'verify-judicial').checked = true;
+          } else {
+            this.checked = false;
+          }
+          return;
+        }
+      }
+      clearUploadedFile(otherFile.inputId, otherFile.boxId, otherFile.previewId);
+      activeVerifyType = newType;
+
+      condAdmin.classList.toggle('active', newType === 'administrative');
+      condJudicial.classList.toggle('active', newType === 'judicial');
+      optAdmin.classList.toggle('selected', newType === 'administrative');
+      optJudicial.classList.toggle('selected', newType === 'judicial');
       document.getElementById('err-verifyType').style.display = 'none';
-      document.getElementById('file-admin-doc').required = document.getElementById('verify-admin').checked;
-      document.getElementById('file-judicial-doc').required = document.getElementById('verify-judicial').checked;
+      document.getElementById('file-admin-doc').required = newType === 'administrative';
+      document.getElementById('file-judicial-doc').required = newType === 'judicial';
+
+      saveDraft();
     });
   });
 
@@ -607,12 +647,16 @@
   })();
 
   nameInput.addEventListener('input', saveDraft);
-  verifyRadios.forEach(r => r.addEventListener('change', saveDraft));
 
-  function setupUpload(inputId, boxId, previewId){
+  // 證明文件（醫師診斷證明書／相驗屍體證明書／死亡證明書）統一僅接受 PDF 掃描檔；
+  // 健保卡／身分證改為接受手機拍照或相簿照片（image），並顯示縮圖預覽
+  function setupUpload(inputId, boxId, previewId, mode){
     const input = document.getElementById(inputId);
     const box = document.getElementById(boxId);
     const preview = document.getElementById(previewId);
+    const errEl = document.getElementById('err-' + inputId.replace('file-',''));
+    const requiredText = errEl ? errEl.textContent : '';
+
     input.addEventListener('change', () => {
       const file = input.files[0];
       if(!file){
@@ -620,11 +664,30 @@
         preview.style.display = 'none';
         return;
       }
+
+      const isValid = mode === 'image'
+        ? file.type.startsWith('image/')
+        : (file.type === 'application/pdf' || /\.pdf$/i.test(file.name));
+
+      if(!isValid){
+        input.value = '';
+        box.classList.remove('has-file');
+        preview.style.display = 'none';
+        if(errEl){
+          errEl.textContent = mode === 'image' ? '僅接受照片格式，請重新拍照或選擇照片' : '僅接受 PDF 格式，請重新上傳 PDF 掃描檔';
+          errEl.style.display = 'block';
+        }
+        return;
+      }
+
       box.classList.add('has-file');
       preview.style.display = 'block';
-      document.getElementById('err-' + inputId.replace('file-','')).style.display = 'none';
+      if(errEl){
+        errEl.textContent = requiredText;
+        errEl.style.display = 'none';
+      }
 
-      if(file.type.startsWith('image/')){
+      if(mode === 'image'){
         const reader = new FileReader();
         reader.onload = e => {
           preview.innerHTML = '<img src="' + e.target.result + '" alt="預覽"><div>已選擇：' + file.name + '</div>';
@@ -636,11 +699,11 @@
     });
   }
 
-  setupUpload('file-nhi', 'box-nhi', 'preview-nhi');
-  setupUpload('file-id', 'box-id', 'preview-id');
-  setupUpload('file-admin-doc', 'box-admin-doc', 'preview-admin-doc');
-  setupUpload('file-judicial-doc', 'box-judicial-doc', 'preview-judicial-doc');
-  setupUpload('file-death', 'box-death', 'preview-death');
+  setupUpload('file-nhi', 'box-nhi', 'preview-nhi', 'image');
+  setupUpload('file-id', 'box-id', 'preview-id', 'image');
+  setupUpload('file-admin-doc', 'box-admin-doc', 'preview-admin-doc', 'pdf');
+  setupUpload('file-judicial-doc', 'box-judicial-doc', 'preview-judicial-doc', 'pdf');
+  setupUpload('file-death', 'box-death', 'preview-death', 'pdf');
 
   document.getElementById('careForm').addEventListener('submit', function(e){
     e.preventDefault();
