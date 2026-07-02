@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家屬臨終關懷目標</title>
+<style>
+  :root{
+    --bg:#f4f2ee;
+    --card:#fffdfa;
+    --primary:#4a7c74;
+    --primary-dark:#365e57;
+    --text:#3a3733;
+    --muted:#82796f;
+    --border:#e4ddd2;
+    --danger:#a86a4f;
+    --success:#3f7d5c;
+    --success-bg:#eaf4ee;
+    --note-bg:#f7f3ec;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.75;
+    padding:32px 16px 80px;
+    font-size:16px;
+  }
+  .container{
+    max-width:720px;
+    margin:0 auto;
+  }
+  header{
+    text-align:center;
+    margin-bottom:20px;
+  }
+  header h1{
+    font-size:25px;
+    color:var(--primary-dark);
+    margin:0 0 8px;
+    font-weight:600;
+    letter-spacing:0.5px;
+  }
+  header p{
+    color:var(--muted);
+    font-size:14px;
+    margin:0;
+  }
+  .intro-note{
+    background:var(--note-bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 22px;
+    margin-bottom:24px;
+    font-size:14px;
+    color:var(--text);
+    line-height:1.9;
+  }
+  .intro-note p{
+    margin:0 0 8px;
+  }
+  .intro-note p:last-child{
+    margin-bottom:0;
+    color:var(--muted);
+    font-size:13px;
+  }
+  form{
+    background:var(--card);
+    border-radius:14px;
+    padding:32px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  }
+  .field{
+    margin-bottom:30px;
+    padding-bottom:26px;
+    border-bottom:1px solid var(--border);
+  }
+  .field:last-of-type{
+    border-bottom:none;
+    margin-bottom:0;
+    padding-bottom:0;
+  }
+  .field-label{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:6px;
+    color:var(--text);
+  }
+  .field-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:var(--primary);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .required{
+    color:var(--danger);
+    font-size:13px;
+    font-weight:400;
+  }
+  .field-desc{
+    font-size:13px;
+    color:var(--muted);
+    margin:2px 0 12px 28px;
+  }
+  .field-body{
+    margin-left:28px;
+  }
+  input[type="text"]{
+    width:100%;
+    min-height:48px;
+    padding:12px 14px;
+    font-size:16px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:#fbfcfc;
+    color:var(--text);
+  }
+  input[type="text"]:focus{
+    outline:none;
+    border-color:var(--primary);
+    background:#fff;
+  }
+  .upload-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    border:2px dashed var(--border);
+    border-radius:10px;
+    padding:24px 16px;
+    text-align:center;
+    background:#fbfcfc;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+    position:relative;
+  }
+  .upload-box:hover{
+    border-color:var(--primary);
+    background:#f2f7f6;
+  }
+  .upload-box.has-file{
+    border-style:solid;
+    border-color:var(--success);
+    background:var(--success-bg);
+  }
+  .upload-box input[type="file"]{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    cursor:pointer;
+    width:100%;
+    height:100%;
+  }
+  .upload-icon{
+    margin-bottom:8px;
+    color:var(--primary);
+    opacity:0.75;
+  }
+  .upload-icon svg{
+    width:26px;
+    height:26px;
+    display:block;
+  }
+  .upload-hint{
+    font-size:13px;
+    color:var(--muted);
+  }
+  .upload-hint strong{
+    color:var(--primary-dark);
+  }
+  .privacy-note{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:8px;
+    display:flex;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .privacy-note svg{
+    width:13px;
+    height:13px;
+    flex-shrink:0;
+    margin-top:3px;
+    opacity:0.7;
+  }
+  .upload-preview{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--success);
+    font-weight:600;
+    display:none;
+    word-break:break-all;
+  }
+  .upload-preview img{
+    display:block;
+    max-width:140px;
+    max-height:140px;
+    margin:8px auto 6px;
+    border-radius:6px;
+    border:1px solid var(--border);
+  }
+  .radio-group{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .radio-option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-height:48px;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    cursor:pointer;
+    background:#fbfcfc;
+    transition:border-color .15s, background .15s;
+  }
+  .radio-option:hover{
+    border-color:var(--primary);
+  }
+  .radio-option.selected{
+    border-color:var(--primary);
+    background:#f2f7f6;
+  }
+  .radio-option input{
+    accent-color:var(--primary);
+    width:18px;
+    height:18px;
+    flex-shrink:0;
+  }
+  .radio-option .opt-text{
+    flex:1;
+    min-width:0;
+  }
+  .radio-option .opt-text strong{
+    display:block;
+    font-size:14px;
+  }
+  .radio-option .opt-text span{
+    font-size:12px;
+    color:var(--muted);
+  }
+  .conditional-upload{
+    margin-top:14px;
+    display:none;
+  }
+  .conditional-upload.active{
+    display:block;
+  }
+  .conditional-upload .sub-label{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:8px;
+    color:var(--primary-dark);
+  }
+  .error-msg{
+    color:var(--danger);
+    font-size:12px;
+    margin-top:6px;
+    display:none;
+  }
+  .actions{
+    margin-top:34px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .actions-row{
+    display:flex;
+    gap:12px;
+  }
+  .action-note{
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+  }
+  button{
+    font-family:inherit;
+    font-size:16px;
+    font-weight:700;
+    min-height:48px;
+    padding:13px 24px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn-submit{
+    background:var(--primary);
+    color:#fff;
+    flex:1;
+  }
+  .btn-submit:hover{
+    background:var(--primary-dark);
+  }
+  .summary{
+    display:none;
+    background:var(--success-bg);
+    border:1px solid var(--success);
+    border-radius:12px;
+    padding:22px 24px;
+    margin-top:24px;
+    font-size:14px;
+  }
+  .summary h2{
+    font-size:17px;
+    color:var(--success);
+    margin:0 0 6px;
+    font-weight:600;
+  }
+  .summary-lead{
+    margin:0 0 14px;
+    color:var(--text);
+    font-size:13px;
+    line-height:1.8;
+  }
+  .summary ul{
+    margin:0;
+    padding-left:18px;
+  }
+  .summary li{
+    margin-bottom:4px;
+  }
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:24px;
+  }
+
+  /* ---- 平板：縮減外距，維持雙欄視覺舒適度 ---- */
+  @media (max-width: 900px){
+    .container{
+      max-width:100%;
+    }
+    form{
+      padding:28px 24px;
+    }
+  }
+
+  /* ---- 手機：拉齊留白、取消縮排，加大可點擊區域 ---- */
+  @media (max-width: 600px){
+    body{
+      padding:20px 12px 60px;
+    }
+    form{
+      padding:22px 16px;
+      border-radius:12px;
+    }
+    header h1{
+      font-size:21px;
+    }
+    header p{
+      font-size:13px;
+    }
+    .intro-note{
+      padding:14px 16px;
+      font-size:13px;
+      line-height:1.8;
+    }
+    .field{
+      margin-bottom:24px;
+      padding-bottom:20px;
+    }
+    .field-label{
+      font-size:15px;
+    }
+    .field-desc,
+    .field-body{
+      margin-left:0;
+    }
+    .upload-box{
+      padding:20px 12px;
+    }
+    .radio-option{
+      padding:12px;
+    }
+    .summary{
+      padding:18px 16px;
+    }
+  }
+
+  /* ---- 極小螢幕（舊款手機）：再收斂字級與間距 ---- */
+  @media (max-width: 360px){
+    header h1{
+      font-size:19px;
+    }
+    .field-num{
+      width:20px;
+      height:20px;
+      font-size:11px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>家屬臨終關懷目標</h1>
+    <p>表單一・往生者基本資料與相驗文件</p>
+  </header>
+
+  <div class="intro-note">
+    <p>對您與家人來說，這段時間並不容易。謝謝您願意在此刻協助我們準備以下資料，讓後續的照護與行政程序能順利進行。</p>
+    <p>請您按照自己的步調填寫即可，不需要著急。文字與選項的填寫內容會保留在此瀏覽器中，若中途離開，回來後仍會看到先前的輸入；檔案上傳因瀏覽器安全限制，重新開啟時需再次選取。</p>
+  </div>
+
+  <form id="careForm" novalidate>
+
+    <!-- 1. 姓名 -->
+    <div class="field">
+      <div class="field-label">
+        <span class="field-num">1</span>
+        往生者姓名 <span class="required">（必填）</span>
+      </div>
+      <div class="field-body">
+        <input type="text" id="deceasedName" name="deceasedName" placeholder="請輸入往生者姓名" required>
+        <div class="error-msg" id="err-name">請提供往生者姓名</div>
+      </div>
+    </div>
+
+    <!-- 2. 健保卡 -->
+    <div class="field">
+      <div class="field-label">
+        <span class="field-num">2</span>
+        往生者健保卡 <span class="required">（必填）</span>
+      </div>
+      <div class="field-desc">請上傳健保卡正面掃描檔或照片</div>
+      <div class="field-body">
+        <label class="upload-box" id="box-nhi" for="file-nhi">
+          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+          <div class="upload-hint"><strong>點擊上傳</strong>或拖曳圖片檔至此</div>
+          <input type="file" id="file-nhi" name="file-nhi" accept="image/*,.pdf" required>
+        </label>
+        <div class="upload-preview" id="preview-nhi"></div>
+        <div class="error-msg" id="err-nhi">請提供往生者健保卡掃描檔，以便協助後續程序</div>
+        <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>此文件僅用於本次程序，我們會謹慎保管。</span></div>
+      </div>
+    </div>
+
+    <!-- 3. 身分證 -->
+    <div class="field">
+      <div class="field-label">
+        <span class="field-num">3</span>
+        往生者身分證 <span class="required">（必填）</span>
+      </div>
+      <div class="field-desc">請上傳身分證正面掃描檔或照片</div>
+      <div class="field-body">
+        <label class="upload-box" id="box-id" for="file-id">
+          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+          <div class="upload-hint"><strong>點擊上傳</strong>或拖曳圖片檔至此</div>
+          <input type="file" id="file-id" name="file-id" accept="image/*,.pdf" required>
+        </label>
+        <div class="upload-preview" id="preview-id"></div>
+        <div class="error-msg" id="err-id">請提供往生者身分證掃描檔，以便協助後續程序</div>
+        <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>此文件僅用於本次程序，我們會謹慎保管。</span></div>
+      </div>
+    </div>
+
+    <!-- 4. 相驗類型決定 -->
+    <div class="field">
+      <div class="field-label">
+        <span class="field-num">4</span>
+        相驗類型決定 <span class="required">（必填）</span>
+      </div>
+      <div class="field-desc">因往生地點不同，將對應不同的行政或司法流程，請選擇本次相驗類型</div>
+      <div class="field-body">
+        <div class="radio-group">
+          <label class="radio-option" id="opt-admin" for="verify-admin">
+            <input type="radio" id="verify-admin" name="verifyType" value="administrative">
+            <span class="opt-text">
+              <strong>行政相驗</strong>
+              <span>一般病故或在醫療機構內死亡，由醫師開立診斷證明</span>
+            </span>
+          </label>
+          <label class="radio-option" id="opt-judicial" for="verify-judicial">
+            <input type="radio" id="verify-judicial" name="verifyType" value="judicial">
+            <span class="opt-text">
+              <strong>司法相驗</strong>
+              <span>非病故、意外或不明原因死亡，由檢察官／法醫相驗</span>
+            </span>
+          </label>
+        </div>
+        <div class="error-msg" id="err-verifyType">請選擇本次的相驗類型</div>
+
+        <!-- 行政相驗上傳 -->
+        <div class="conditional-upload" id="cond-admin">
+          <div class="sub-label">請上傳醫師診斷證明書</div>
+          <label class="upload-box" id="box-admin-doc" for="file-admin-doc">
+            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+            <div class="upload-hint"><strong>點擊上傳</strong>或拖曳檔案至此</div>
+            <input type="file" id="file-admin-doc" name="file-admin-doc" accept="image/*,.pdf">
+          </label>
+          <div class="upload-preview" id="preview-admin-doc"></div>
+          <div class="error-msg" id="err-admin-doc">請提供醫師診斷證明書</div>
+        </div>
+
+        <!-- 司法相驗上傳 -->
+        <div class="conditional-upload" id="cond-judicial">
+          <div class="sub-label">請上傳相驗屍體證明書</div>
+          <label class="upload-box" id="box-judicial-doc" for="file-judicial-doc">
+            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M12 4L8 8M12 4l4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+            <div class="upload-hint"><strong>點擊上傳</strong>或拖曳檔案至此</div>
+            <input type="file" id="file-judicial-doc" name="file-judicial-doc" accept="image/*,.pdf">
+          </label>
+          <div class="upload-preview" id="preview-judicial-doc"></div>
+          <div class="error-msg" id="err-judicial-doc">請提供相驗屍體證明書</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 死亡證明書 -->
+    <div class="field">
+      <div class="field-label">
+        <span class="field-num">5</span>
+        死亡證明書 <span class="required">（必填）</span>
+      </div>
+      <div class="field-desc">請上傳行政或司法相驗流程後產生的死亡證明書（PDF掃描檔）</div>
+      <div class="field-body">
+        <label class="upload-box" id="box-death" for="file-death">
+          <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/></svg></div>
+          <div class="upload-hint">點擊上傳 <strong>PDF</strong> 掃描檔</div>
+          <input type="file" id="file-death" name="file-death" accept="application/pdf" required>
+        </label>
+        <div class="upload-preview" id="preview-death"></div>
+        <div class="error-msg" id="err-death">請提供死亡證明書 PDF 檔，以便協助後續程序</div>
+        <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>此文件僅用於本次程序，我們會謹慎保管。</span></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="actions-row">
+        <button type="submit" class="btn-submit">確認送出</button>
+      </div>
+      <div class="action-note">送出前，請再確認上傳的文件清楚可辨識。若需要協助，我們都在。</div>
+    </div>
+  </form>
+
+  <div class="summary" id="summary">
+    <h2>謝謝您</h2>
+    <p class="summary-lead">我們已收到以下資料，接下來的每一步，我們會陪伴您一起完成。</p>
+    <ul id="summaryList"></ul>
+  </div>
+
+  <footer>家屬臨終關懷目標・表單一</footer>
+</div>
+
+<script>
+  const verifyRadios = document.querySelectorAll('input[name="verifyType"]');
+  const condAdmin = document.getElementById('cond-admin');
+  const condJudicial = document.getElementById('cond-judicial');
+  const optAdmin = document.getElementById('opt-admin');
+  const optJudicial = document.getElementById('opt-judicial');
+
+  verifyRadios.forEach(r => {
+    r.addEventListener('change', () => {
+      condAdmin.classList.toggle('active', r.value === 'administrative' && r.checked);
+      condJudicial.classList.toggle('active', r.value === 'judicial' && r.checked);
+      optAdmin.classList.toggle('selected', document.getElementById('verify-admin').checked);
+      optJudicial.classList.toggle('selected', document.getElementById('verify-judicial').checked);
+      document.getElementById('err-verifyType').style.display = 'none';
+      document.getElementById('file-admin-doc').required = document.getElementById('verify-admin').checked;
+      document.getElementById('file-judicial-doc').required = document.getElementById('verify-judicial').checked;
+    });
+  });
+
+  // 自動保留文字與選項填寫進度（僅限本裝置、本瀏覽器）
+  const DRAFT_KEY = 'careForm_draft_v1';
+  const nameInput = document.getElementById('deceasedName');
+
+  function saveDraft(){
+    const checked = document.querySelector('input[name="verifyType"]:checked');
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({
+      name: nameInput.value,
+      verifyType: checked ? checked.value : ''
+    }));
+  }
+
+  (function restoreDraft(){
+    try{
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if(!raw) return;
+      const data = JSON.parse(raw);
+      if(data.name) nameInput.value = data.name;
+      if(data.verifyType){
+        const radio = document.getElementById(data.verifyType === 'administrative' ? 'verify-admin' : 'verify-judicial');
+        if(radio){
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change'));
+        }
+      }
+    }catch(e){ /* 忽略讀取錯誤 */ }
+  })();
+
+  nameInput.addEventListener('input', saveDraft);
+  verifyRadios.forEach(r => r.addEventListener('change', saveDraft));
+
+  function setupUpload(inputId, boxId, previewId){
+    const input = document.getElementById(inputId);
+    const box = document.getElementById(boxId);
+    const preview = document.getElementById(previewId);
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      if(!file){
+        box.classList.remove('has-file');
+        preview.style.display = 'none';
+        return;
+      }
+      box.classList.add('has-file');
+      preview.style.display = 'block';
+      document.getElementById('err-' + inputId.replace('file-','')).style.display = 'none';
+
+      if(file.type.startsWith('image/')){
+        const reader = new FileReader();
+        reader.onload = e => {
+          preview.innerHTML = '<img src="' + e.target.result + '" alt="預覽"><div>已選擇：' + file.name + '</div>';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.innerHTML = '已選擇：' + file.name;
+      }
+    });
+  }
+
+  setupUpload('file-nhi', 'box-nhi', 'preview-nhi');
+  setupUpload('file-id', 'box-id', 'preview-id');
+  setupUpload('file-admin-doc', 'box-admin-doc', 'preview-admin-doc');
+  setupUpload('file-judicial-doc', 'box-judicial-doc', 'preview-judicial-doc');
+  setupUpload('file-death', 'box-death', 'preview-death');
+
+  document.getElementById('careForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    let valid = true;
+
+    const name = document.getElementById('deceasedName').value.trim();
+    document.getElementById('err-name').style.display = name ? 'none' : 'block';
+    if(!name) valid = false;
+
+    ['nhi','id','death'].forEach(key => {
+      const f = document.getElementById('file-' + key).files[0];
+      document.getElementById('err-' + key).style.display = f ? 'none' : 'block';
+      if(!f) valid = false;
+    });
+
+    const verifyChecked = document.querySelector('input[name="verifyType"]:checked');
+    document.getElementById('err-verifyType').style.display = verifyChecked ? 'none' : 'block';
+    if(!verifyChecked){
+      valid = false;
+    } else {
+      if(verifyChecked.value === 'administrative'){
+        const f = document.getElementById('file-admin-doc').files[0];
+        document.getElementById('err-admin-doc').style.display = f ? 'none' : 'block';
+        if(!f) valid = false;
+      } else {
+        const f = document.getElementById('file-judicial-doc').files[0];
+        document.getElementById('err-judicial-doc').style.display = f ? 'none' : 'block';
+        if(!f) valid = false;
+      }
+    }
+
+    if(!valid){
+      const firstError = document.querySelector('.error-msg[style*="block"]');
+      if(firstError) firstError.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const summaryList = document.getElementById('summaryList');
+    const verifyLabel = verifyChecked.value === 'administrative' ? '行政相驗（附醫師診斷證明書）' : '司法相驗（附相驗屍體證明書）';
+    summaryList.innerHTML =
+      '<li>往生者姓名：' + name + '</li>' +
+      '<li>健保卡：' + document.getElementById('file-nhi').files[0].name + '</li>' +
+      '<li>身分證：' + document.getElementById('file-id').files[0].name + '</li>' +
+      '<li>相驗類型：' + verifyLabel + '</li>' +
+      '<li>死亡證明書：' + document.getElementById('file-death').files[0].name + '</li>';
+
+    document.getElementById('summary').style.display = 'block';
+    document.getElementById('summary').scrollIntoView({behavior:'smooth', block:'start'});
+    localStorage.removeItem(DRAFT_KEY);
+  });
+</script>
+</body>
+</html>
